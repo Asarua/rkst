@@ -31,7 +31,7 @@ export function rkst<Response = any>(
   }
   options = Object.assign({}, defaultConfig, options)
 
-  if (options.headers?.['ContentType'] === ContentType.URL_ENCODED) {
+  if (options.headers?.['Content-Type'] === ContentType.URL_ENCODED) {
     options.url = memorizedQueryString(options.url, options.body)
   }
 
