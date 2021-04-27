@@ -3,25 +3,23 @@
     "target": "ES5",
     "lib": [
       "ESNext",
-      "ES2015",
-      "ES2015.Core",
       "DOM",
-      "ES2015.Collection"
     ],
-    "module": "ESNext",
+    "module": "CommonJS",
     "removeComments": false,
     "preserveConstEnums": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "declarationDir": "../types",
+    "declarationDir": "aaa",
+    "outDir": "aaa",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "sourceMap": true,
-    "baseUrl": ".",
-    "rootDir": ".",
+    "baseUrl": "./",
+    "rootDir": "./",
     "allowJs": false,
     "resolveJsonModule": true,
     "downlevelIteration": true,
@@ -31,6 +29,10 @@
   },
   "exclude": [
     "node_modules",
+    "types"
+  ],
+  "include": [
+    "src/**/*"
   ],
   "compileOnSave": false
 }

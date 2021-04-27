@@ -1,8 +1,14 @@
 {
   "name": "rkst",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "description": "a http lib with typescript",
   "repository": "https://github.com/Asarua/rkst.git",
   "author": "Asarua <asarua@icloud.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
