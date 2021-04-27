@@ -38,6 +38,7 @@ export function rkst<Response = any>(
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.timeout = options.timeOut || 10000
+    xhr.withCredentials = options.withCredentials || false
     xhr.open(options.methods, options.url)
     Object.keys(options.headers || {}).forEach(item => {
       xhr.setRequestHeader(item, Reflect.get(options.headers || {}, item))
