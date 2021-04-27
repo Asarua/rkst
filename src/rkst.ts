@@ -27,7 +27,7 @@ export function rkst<Response = any>(
 ): Promise<RkstResponse<Response>> {
   let options = config
   if (typeof before === 'function') {
-    Object.assign(options, before(options))
+    options = Object.assign({}, before(options))
   }
   options = Object.assign({}, defaultConfig, options)
 
