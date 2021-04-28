@@ -1,14 +1,23 @@
 {
   "name": "rkst",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "./lib/index.js",
+  "module": "./lib/index.esm.js",
   "types": "./types/index.d.ts",
   "description": "a http lib with typescript",
   "repository": "https://github.com/Asarua/rkst.git",
   "author": "Asarua <asarua@icloud.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "rollup": "^2.45.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.2.4"
   }
 }

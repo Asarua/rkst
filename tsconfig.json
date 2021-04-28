@@ -5,15 +5,15 @@
       "ESNext",
       "DOM",
     ],
-    "module": "CommonJS",
+    "module": "ESNext",
     "removeComments": false,
     "preserveConstEnums": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "declarationDir": "aaa",
-    "outDir": "aaa",
+    "declarationDir": "types",
+    "outDir": "lib",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strictNullChecks": true,
@@ -30,9 +30,6 @@
   "exclude": [
     "node_modules",
     "types"
-  ],
-  "include": [
-    "src/**/*"
   ],
   "compileOnSave": false
 }

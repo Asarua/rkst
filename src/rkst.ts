@@ -2,10 +2,12 @@ import { Methods } from './methods'
 import { ConfigureRkst } from './index'
 import { defaultConfig } from './defaultConfig'
 import { ContentType } from './contentType'
-import { memorizedQueryString, createResponse } from './utils'
+import { memorizedQueryString } from './utils'
 
+
+type Method = keyof typeof Methods
 export interface RkstConfig {
-  methods: Methods,
+  methods: Method | Lowercase<Method>,
   url: string,
   body?: BodyInit,
   headers?: Record<string, string | number>,
@@ -24,7 +26,7 @@ export function rkst<Response = any>(
   config: RkstConfig,
   before?: ConfigureRkst['before'],
   after?: ConfigureRkst['after']
-): Promise<RkstResponse<Response>> {
+): Promise<Response> {
   let options = config
   if (typeof before === 'function') {
     options = Object.assign({}, before(options))
@@ -49,7 +51,7 @@ export function rkst<Response = any>(
       if (xhr.readyState === 4) {
         const isAllow = allowCodes.some(code => code === xhr.status)
         const operation = isAllow ? resolve : reject
-        let data = createResponse<Response>(xhr, isAllow)
+        let data: Response = JSON.parse(xhr.responseText)
         if (typeof after === 'function') {
           data = after<Response>(data)
         }

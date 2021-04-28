@@ -1,7 +1,8 @@
 import { Methods } from './methods';
 import { ConfigureRkst } from './index';
+declare type Method = keyof typeof Methods;
 export interface RkstConfig {
-    methods: Methods;
+    methods: Method | Lowercase<Method>;
     url: string;
     body?: BodyInit;
     headers?: Record<string, string | number>;
@@ -14,4 +15,5 @@ export interface RkstResponse<Data> {
     msg: string;
     data: Data;
 }
-export declare function rkst<Response = any>(config: RkstConfig, before?: ConfigureRkst['before'], after?: ConfigureRkst['after']): Promise<RkstResponse<Response>>;
+export declare function rkst<Response = any>(config: RkstConfig, before?: ConfigureRkst['before'], after?: ConfigureRkst['after']): Promise<Response>;
+export {};

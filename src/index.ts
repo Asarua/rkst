@@ -2,12 +2,17 @@ import { RkstConfig, rkst, RkstResponse } from './rkst'
 
 export interface ConfigureRkst {
   before?(config: RkstConfig): RkstConfig;
-  after?<Response>(config: RkstResponse<Response>): RkstResponse<Response>;
+  after?<ConfigureResponse = any>(config: ConfigureResponse): ConfigureResponse;
+  options?: RkstConfig
 }
 
 export function configureRkst(rkstConfig: ConfigureRkst = {}) {
-  return function<Response = any>(config: RkstConfig) {
-    return rkst<Response>(config, rkstConfig?.before, rkstConfig?.after)
+  return function<ResponseData = any>(config: RkstConfig) {
+    return rkst<ResponseData>(
+      { ...(rkstConfig.options || {}), ...config },
+      rkstConfig?.before,
+      rkstConfig?.after
+    )
   }
 }
 

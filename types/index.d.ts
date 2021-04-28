@@ -1,8 +1,9 @@
 import { RkstConfig, rkst, RkstResponse } from './rkst';
 export interface ConfigureRkst {
     before?(config: RkstConfig): RkstConfig;
-    after?<Response>(config: RkstResponse<Response>): RkstResponse<Response>;
+    after?<ConfigureResponse = any>(config: ConfigureResponse): ConfigureResponse;
+    options?: RkstConfig;
 }
-export declare function configureRkst(rkstConfig?: ConfigureRkst): <Response_1 = any>(config: RkstConfig) => Promise<RkstResponse<Response_1>>;
+export declare function configureRkst(rkstConfig?: ConfigureRkst): <ResponseData = any>(config: RkstConfig) => Promise<ResponseData>;
 export default rkst;
 export { RkstConfig, RkstResponse };
