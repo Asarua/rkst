@@ -9,6 +9,7 @@ export interface RkstConfig {
     timeOut?: number;
     allowCode?: number | Array<number>;
     withCredentials?: boolean;
+    baseUrl?: string;
 }
 export interface RkstResponse<Data> {
     code: number;

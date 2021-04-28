@@ -4,7 +4,6 @@ import { defaultConfig } from './defaultConfig'
 import { ContentType } from './contentType'
 import { memorizedQueryString } from './utils'
 
-
 type Method = keyof typeof Methods
 export interface RkstConfig {
   methods: Method | Lowercase<Method>,
@@ -13,7 +12,8 @@ export interface RkstConfig {
   headers?: Record<string, string | number>,
   timeOut?: number,
   allowCode?: number | Array<number>,
-  withCredentials?: boolean
+  withCredentials?: boolean,
+  baseUrl?: string
 }
 
 export interface RkstResponse<Data> {
@@ -32,6 +32,10 @@ export function rkst<Response = any>(
     options = Object.assign({}, before(options))
   }
   options = Object.assign({}, defaultConfig, options)
+
+  if (!options.url?.includes('//') && options?.baseUrl) {
+    options.url = options.baseUrl + options.url
+  }
 
   if (options.headers?.['Content-Type'] === ContentType.URL_ENCODED) {
     options.url = memorizedQueryString(options.url, options.body)
