@@ -1,4 +1,6 @@
 import { RkstConfig, rkst, RkstResponse } from './rkst'
+import { ContentType } from './contentType'
+import { Methods } from './methods'
 
 export interface ConfigureRkst {
   before?(config: RkstConfig): RkstConfig;
@@ -19,5 +21,7 @@ export function configureRkst(rkstConfig: ConfigureRkst = {}) {
 export default rkst
 export {
   RkstConfig,
-  RkstResponse
+  RkstResponse,
+  ContentType,
+  Methods
 }

@@ -1,4 +1,4 @@
-export const enum ContentType {
+export enum ContentType {
   URL_ENCODED = 'application/x-www-form-urlencoded',
   TEXT_PLAIN = 'text/plain',
   TEXT_HTML = 'text/html',

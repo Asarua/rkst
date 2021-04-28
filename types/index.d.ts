@@ -1,4 +1,6 @@
 import { RkstConfig, rkst, RkstResponse } from './rkst';
+import { ContentType } from './contentType';
+import { Methods } from './methods';
 export interface ConfigureRkst {
     before?(config: RkstConfig): RkstConfig;
     after?<ConfigureResponse = any>(config: ConfigureResponse): ConfigureResponse;
@@ -6,4 +8,4 @@ export interface ConfigureRkst {
 }
 export declare function configureRkst(rkstConfig?: ConfigureRkst): <ResponseData = any>(config: RkstConfig) => Promise<ResponseData>;
 export default rkst;
-export { RkstConfig, RkstResponse };
+export { RkstConfig, RkstResponse, ContentType, Methods };
