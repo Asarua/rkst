@@ -8,7 +8,7 @@ type Method = keyof typeof Methods
 export interface RkstConfig {
   methods: Method | Lowercase<Method>,
   url: string,
-  body?: BodyInit,
+  body?: any,
   headers?: Record<string, string | number>,
   timeOut?: number,
   allowCode?: number | Array<number>,
@@ -22,11 +22,34 @@ export interface RkstResponse<Data> {
   data: Data;
 }
 
-export function rkst<Response = any>(
-  config: RkstConfig,
-  before?: ConfigureRkst['before'],
-  after?: ConfigureRkst['after']
-): Promise<Response> {
+interface Rkst {
+  <Response = any>(
+    config: RkstConfig,
+    before?: ConfigureRkst['before'],
+    after?: ConfigureRkst['after']
+  ): Promise<Response>;
+  get<GetResponse = any>(
+    url: string,
+    headers?: RkstConfig['headers']
+  ): Promise<GetResponse>;
+  post<PostResponse = any>(
+    url: string,
+    body?: any,
+    headers?: RkstConfig['headers']
+  ): Promise<PostResponse>;
+  put<PutResponse = any>(
+    url: string,
+    body?: any,
+    headers?: RkstConfig['headers']
+  ): Promise<PutResponse>;
+  delete<DeleteResponse = any>(
+    url: string,
+    body?: any,
+    headers?: RkstConfig['headers']
+  ): Promise<DeleteResponse>;
+}
+
+export const rkst: Rkst = (config, before, after) => {
   let options = config
   if (typeof before === 'function') {
     options = Object.assign({}, before(options))
@@ -55,7 +78,7 @@ export function rkst<Response = any>(
       if (xhr.readyState === 4) {
         const isAllow = allowCodes.some(code => code === xhr.status)
         const operation = isAllow ? resolve : reject
-        let data: Response = JSON.parse(xhr.responseText)
+        let data = JSON.parse(xhr.responseText)
         if (typeof after === 'function') {
           data = after<Response>(data)
         }
@@ -64,3 +87,39 @@ export function rkst<Response = any>(
     }
   })
 }
+
+rkst.get = (url, headers = {}) => {
+  return rkst({
+    url,
+    methods: 'get',
+    headers
+  })
+}
+
+rkst.post = (url, body = {}, headers = {}) => {
+  return rkst({
+    url,
+    methods: 'post',
+    body,
+    headers
+  })
+}
+
+rkst.put = (url, body = {}, headers = {}) => {
+  return rkst({
+    url,
+    methods: 'post',
+    body,
+    headers
+  })
+}
+
+rkst.delete = (url, body = {}, headers = {}) => {
+  return rkst({
+    url,
+    methods: 'post',
+    body,
+    headers
+  })
+}
+

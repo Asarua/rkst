@@ -5,7 +5,7 @@ import { Methods } from './methods'
 export interface ConfigureRkst {
   before?(config: RkstConfig): RkstConfig;
   after?<ConfigureResponse = any>(config: ConfigureResponse): ConfigureResponse;
-  options?: RkstConfig
+  options?: Partial<RkstConfig>
 }
 
 export function configureRkst(rkstConfig: ConfigureRkst = {}) {
