@@ -1,9 +1,15 @@
 {
   "name": "rkst",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "./lib/index.js",
   "module": "./lib/index.esm.js",
   "types": "./types/index.d.ts",
+  "keywords": [
+    "xhr",
+    "http",
+    "ajax",
+    "promise"
+  ],
   "description": "a http lib with typescript",
   "repository": "https://github.com/Asarua/rkst.git",
   "author": "Asarua <asarua@icloud.com>",

@@ -71,6 +71,17 @@ export default {
 }
 ```
 
+> 使用`rkst.get`、`rkst.post`、`rkst.put`、`rkst.delete`直接请求
+
+```typescript
+import rkst from 'rkst'
+
+rkst.get<{ a: 1 }>('baidu.com')
+  .then(data => {
+    // data的type === { a: 1 }
+  })
+```
+
 > 通过泛型传递返回参数
 
 ```typescript
@@ -105,8 +116,4 @@ export const get = <URL extends keyof API['get']>(url: URL): Promise<API['get'][
 
 ## License
 
-[`MIT`](https://github.com/Asarua/rkst/LICENSE)
-
-## Keywords
-
-`xhr` `http` `ajax` `promise`
+[`MIT`](https://github.com/Asarua/rkst/blob/master/LICENSE)
