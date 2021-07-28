@@ -9,13 +9,28 @@ export interface ConfigureRkst {
 }
 
 export function configureRkst(rkstConfig: ConfigureRkst = {}) {
-  return function<ResponseData = any>(config: RkstConfig) {
+
+  const baseUrl = rkstConfig.options?.baseUrl || ''
+  function wrapper<ResponseData = any>(config: RkstConfig) {
     return rkst<ResponseData>(
       { ...(rkstConfig.options || {}), ...config },
       rkstConfig?.before,
       rkstConfig?.after
     )
   }
+
+  wrapper.get = <T>(url: string, headers: RkstConfig['headers']) =>
+    rkst.get<T>(baseUrl + url, headers)
+
+  wrapper.post = <R>(url: string, body: any, headers: RkstConfig['headers']) => {
+    return rkst.post<R>(
+      baseUrl + url,
+      body,
+      headers
+    )
+  }
+
+  return wrapper
 }
 
 export default rkst
